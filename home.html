@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeriodPal - Advanced Period Tracking & Women's Health</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="logo-text">Period<span>Pal</span></div>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('main.home') }}" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="{{ url_for('main.dashboard') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="{{ url_for('main.contact') }}"><i class="fas fa-lightbulb"></i> Contact</a></li>
+                    <li><a href="{{ url_for('main.about') }}"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="{{ url_for('auth.login') }}" class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="{{ url_for('auth.register') }}" class="btn btn-primary"><i class="fas fa-user-plus"></i> Register</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Empowering Women Through <span>Cycle Awareness</span></h1>
+                <p class="hero-subtitle">Advanced period tracking with predictions, health insights, and personalized recommendations tailored to your unique cycle.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary btn-lg"><i class="fas fa-rocket"></i> Get Started</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Prediction Accuracy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Health Support</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://videos.openai.com/vg-assets/assets%2Ftask_01jrqc2jrafpntw686gkxch72f%2Fimg_0.webp?st=2025-04-13T08%3A57%3A32Z&se=2025-04-19T09%3A57%3A32Z&sks=b&skt=2025-04-13T08%3A57%3A32Z&ske=2025-04-19T09%3A57%3A32Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=3d249c53-07fa-4ba4-9b65-0bf8eb4ea46a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=vhJTMnLO5jJkjr79lMqjwMrnCWczl0vcbo4GpVWKacI%3D&az=oaivgprodscus" alt="Woman using PeriodPal app">
+                <div class="floating-card cycle-card">
+                    <div class="cycle-day">Day 14</div>
+                    <div class="cycle-phase">Ovulation Phase</div>
+                </div>
+                <div class="floating-card symptom-card">
+                    <div class="symptom-title">Today's Symptoms</div>
+                    <div class="symptom-items">
+                        <span><i class="fas fa-bolt"></i> Energy</span>
+                        <span><i class="fas fa-smile"></i> Happy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Comprehensive <span>Cycle Tracking</span></h2>
+                <p>PeriodPal goes beyond basic period tracking to provide holistic women's health insights</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Graph Prediction</h3>
+                    <p>Our graph help you learn about  your unique patterns and  predicts cycles with 98% accuracy over time.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Symptom Tracking</h3>
+                    <p>Log 50+ symptoms and moods to identify patterns and triggers.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Fitness Planner</h3>
+                    <p>Workout recommendations optimized for each phase of your cycle.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Nutrition Guide</h3>
+                    <p>Meal plans and supplements tailored to your menstrual phase.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Cycle Tracker Section -->
+<section class="tracker-section">
+    <div class="container">
+        <div class="tracker-container">
+            <div class="tracker-form">
+                <h2>Track Your <span>Cycle</span></h2>
+                <p class="section-subtitle">Enter your details to get personalized predictions and insights</p>
+                
+                <form id="periodForm" class="advanced-form">
+                    <div class="form-group">
+                        <label for="lastPeriod"><i class="far fa-calendar-alt"></i> Last Period Date</label>
+                        <input type="date" id="lastPeriod" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cycleLength"><i class="fas fa-ruler-horizontal"></i> Average Cycle Length (days)</label>
+                        <div class="range-container">
+                            <input type="range" id="cycleLength" min="20" max="45" value="28" step="1">
+                            <span id="cycleLengthValue">28</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="periodDuration"><i class="fas fa-clock"></i> Period Duration (days)</label>
+                        <div class="range-container">
+                            <input type="range" id="periodDuration" min="2" max="10" value="5" step="1">
+                            <span id="periodDurationValue">5</span>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="generatePredictions" class="btn btn-primary btn-block">
+                        <i class="fas fa-chart-line"></i> Generate Predictions
+                    </button>
+                </form>
+            </div>
+            
+            <div class="tracker-results">
+                <div class="prediction-card">
+                    <div class="prediction-header">
+                        <h3>Cycle Forecast</h3>
+                        <div class="prediction-accuracy">94% Accuracy</div>
+                    </div>
+                    <div class="prediction-body">
+                        <div class="next-period">
+                            <div class="period-label">Next Period</div>
+                            <div class="period-date" id="nextPeriodDate">--</div>
+                            <div class="period-countdown" id="periodCountdown">--</div>
+                        </div>
+                        <div class="fertility-window">
+                            <div class="fertility-label">Fertile Window</div>
+                            <div class="fertility-dates" id="fertilityDates">--</div>
+                            <div class="fertility-status" id="fertilityStatus">--</div>
+                        </div>
+                    </div>
+                    <div class="prediction-footer">
+                        <div class="cycle-day">
+                            <div class="day-label">Today is</div>
+                            <div class="day-number" id="cycleDay">--</div>
+                            <div class="phase-name" id="cyclePhase">--</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="periodChart" class="chart-container"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Health Insights Section -->
+    <section class="insights-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your <span>Health Insights</span></h2>
+                <p>Personalized recommendations based on your cycle data</p>
+            </div>
+            
+            <div class="insights-tabs">
+                <div class="tab-header">
+                    <button class="tab-btn active" onclick="openTab(event, 'exercise')"><i class="fas fa-dumbbell"></i> Exercise</button>
+                    <button class="tab-btn" onclick="openTab(event, 'nutrition')"><i class="fas fa-utensils"></i> Nutrition</button>
+                    <button class="tab-btn" onclick="openTab(event, 'wellness')"><i class="fas fa-spa"></i> Wellness</button>
+                    <button class="tab-btn" onclick="openTab(event, 'pcos')"><i class="fas fa-clipboard-check"></i> PCOS Check</button>
+                </div>
+                
+                <div id="exercise" class="tab-content active-tab">
+                    <div class="recommendation-card">
+                        <div class="recommendation-header">
+                            <h3>Today's Exercise Recommendation</h3>
+                            <div class="intensity-level">
+                                <span>Intensity:</span>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>Moderate</span>
+                            </div>
+                        </div>
+                        <div class="recommendation-body">
+                            <p id="exerciseSuggestion">Based on your luteal phase, we recommend moderate strength training and light cardio to maintain energy levels while being gentle on your body.</p>
+                            
+                            <div class="exercise-grid">
+                                <div class="exercise-card">
+                                    <div class="exercise-image" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80')"></div>
+                                    <div class="exercise-info">
+                                        <h4>Strength Training</h4>
+                                        <p>Moderate weights with higher reps to maintain muscle without overexertion</p>
+                                        <div class="exercise-meta">
+                                            <span><i class="fas fa-clock"></i> 30-45 mins</span>
+                                            <span><i class="fas fa-fire"></i> 200-300 cal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="exercise-card">
+                                    <div class="exercise-image" style="background-image: url('https://www.fernwoodfitness.com.au/wp-content/uploads/2022/03/Reformer_Pilates_landing_page_desktop.jpg')"></div>
+                                    <div class="exercise-info">
+                                        <h4>Pilates</h4>
+                                        <p>Focus on core strength and flexibility with low-impact movements</p>
+                                        <div class="exercise-meta">
+                                            <span><i class="fas fa-clock"></i> 45-60 mins</span>
+                                            <span><i class="fas fa-fire"></i> 150-250 cal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="exercise-card">
+                                    <div class="exercise-image" style="background-image: url('https://www.verywellhealth.com/thmb/Sds5aTQ7jT5E5WIeZ9TibnV6PkI=/3867x2578/filters:fill(87E3EF,1)/Older-women-walking-together-outdoors-Ariel-Skelley-56a6c0975f9b58b7d0e47676.jpg')"></div>
+                                    <div class="exercise-info">
+                                        <h4>Walking</h4>
+                                        <p>Brisk walking to boost circulation and mood without stress</p>
+                                        <div class="exercise-meta">
+                                            <span><i class="fas fa-clock"></i> 30-60 mins</span>
+                                            <span><i class="fas fa-fire"></i> 150-300 cal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="nutrition" class="tab-content">
+                    <div class="recommendation-card">
+                        <div class="recommendation-header">
+                            <h3>Nutrition Guide</h3>
+                            <div class="phase-indicator">
+                                <span>Luteal Phase Nutrition</span>
+                            </div>
+                        </div>
+                        <div class="recommendation-body">
+                            <p>During your luteal phase, focus on foods that support progesterone production and help with potential PMS symptoms.</p>
+                            
+                            <div class="nutrition-grid">
+                                <div class="nutrition-card">
+                                    <div class="nutrition-icon">
+                                        <i class="fas fa-seedling"></i>
+                                    </div>
+                                    <h4>Leafy Greens</h4>
+                                    <p>Rich in magnesium to reduce bloating and cramps</p>
+                                </div>
+                                
+                                <div class="nutrition-card">
+                                    <div class="nutrition-icon">
+                                        <i class="fas fa-fish"></i>
+                                    </div>
+                                    <h4>Omega-3s</h4>
+                                    <p>Salmon and flaxseeds to reduce inflammation</p>
+                                </div>
+                                
+                                <div class="nutrition-card">
+                                    <div class="nutrition-icon">
+                                        <i class="fas fa-egg"></i>
+                                    </div>
+                                    <h4>Lean Proteins</h4>
+                                    <p>Support stable energy and hormone production</p>
+                                </div>
+                                
+                                <div class="nutrition-card">
+                                    <div class="nutrition-icon">
+                                        <i class="fas fa-seedling"></i>
+                                    </div>
+                                    <h4>Complex Carbs</h4>
+                                    <p>Whole grains to stabilize mood and energy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="wellness" class="tab-content">
+                    <div class="mood-tracker">
+                        <h3><i class="fas fa-smile"></i> Mood & Symptom Tracker</h3>
+                        <form id="moodForm" class="mood-form">
+                            <div class="form-group">
+                                <label for="mood">Today's Mood</label>
+                                <div class="mood-options">
+                                    <input type="radio" name="mood" id="mood1" value="Happy" checked>
+                                    <label for="mood1" class="mood-option happy">
+                                        <i class="fas fa-laugh-beam"></i>
+                                        <span>Happy</span>
+                                    </label>
+                                    
+                                    <input type="radio" name="mood" id="mood2" value="Sad">
+                                    <label for="mood2" class="mood-option sad">
+                                        <i class="fas fa-sad-tear"></i>
+                                        <span>Sad</span>
+                                    </label>
+                                    
+                                    <input type="radio" name="mood" id="mood3" value="Anxious">
+                                    <label for="mood3" class="mood-option anxious">
+                                        <i class="fas fa-flushed"></i>
+                                        <span>Anxious</span>
+                                    </label>
+                                    
+                                    <input type="radio" name="mood" id="mood4" value="Energetic">
+                                    <label for="mood4" class="mood-option energetic">
+                                        <i class="fas fa-bolt"></i>
+                                        <span>Energetic</span>
+                                    </label>
+                                    
+                                    <input type="radio" name="mood" id="mood5" value="Tired">
+                                    <label for="mood5" class="mood-option tired">
+                                        <i class="fas fa-tired"></i>
+                                        <span>Tired</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="symptoms">Symptoms (Select all that apply)</label>
+                                <div class="symptom-options">
+                                    <input type="checkbox" id="symptom1" name="symptom" value="Cramps">
+                                    <label for="symptom1" class="symptom-option">Cramps</label>
+                                    
+                                    <input type="checkbox" id="symptom2" name="symptom" value="Bloating">
+                                    <label for="symptom2" class="symptom-option">Bloating</label>
+                                    
+                                    <input type="checkbox" id="symptom3" name="symptom" value="Headache">
+                                    <label for="symptom3" class="symptom-option">Headache</label>
+                                    
+                                    <input type="checkbox" id="symptom4" name="symptom" value="Acne">
+                                    <label for="symptom4" class="symptom-option">Acne</label>
+                                    
+                                    <input type="checkbox" id="symptom5" name="symptom" value="Fatigue">
+                                    <label for="symptom5" class="symptom-option">Fatigue</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="notes">Additional Notes</label>
+                                <textarea id="notes" placeholder="How are you feeling today? Any other symptoms?"></textarea>
+                            </div>
+                            
+                            <button type="button" onclick="logMood()" class="btn btn-primary btn-block">
+                                <i class="fas fa-save"></i> Log Entry
+                            </button>
+                        </form>
+                        
+                        <div class="mood-history">
+                            <h4><i class="fas fa-history"></i> Your Mood History</h4>
+                            <div id="moodLog" class="mood-log">
+                                <!-- Mood logs will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="pcos" class="tab-content">
+                    <div class="pcos-checker">
+                        <h3><i class="fas fa-clipboard-check"></i> PCOS Risk Assessment</h3>
+                        <p>Complete this quick assessment to evaluate your potential risk for Polycystic Ovary Syndrome (PCOS)</p>
+                        
+                        <form id="pcosForm" class="pcos-form">
+                            <div class="form-group">
+                                <label>Select symptoms you experience regularly:</label>
+                                <div class="pcos-options">
+                                    <div class="pcos-option">
+                                        <input type="checkbox" id="pcos1" name="symptom" value="irregular">
+                                        <label for="pcos1">
+                                            <i class="fas fa-calendar-times"></i>
+                                            <span>Irregular Periods</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="pcos-option">
+                                        <input type="checkbox" id="pcos2" name="symptom" value="hair">
+                                        <label for="pcos2">
+                                            <i class="fas fa-cut"></i>
+                                            <span>Excessive Hair Growth</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="pcos-option">
+                                        <input type="checkbox" id="pcos3" name="symptom" value="weight">
+                                        <label for="pcos3">
+                                            <i class="fas fa-weight"></i>
+                                            <span>Unexplained Weight Gain</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="pcos-option">
+                                        <input type="checkbox" id="pcos4" name="symptom" value="acne">
+                                        <label for="pcos4">
+                                            <i class="fas fa-allergies"></i>
+                                            <span>Persistent Acne</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="pcos-option">
+                                        <input type="checkbox" id="pcos5" name="symptom" value="cysts">
+                                        <label for="pcos5">
+                                            <i class="fas fa-dot-circle"></i>
+                                            <span>Ovarian Cysts</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="pcos-option">
+                                        <input type="checkbox" id="pcos6" name="symptom" value="hairloss">
+                                        <label for="pcos6">
+                                            <i class="fas fa-air-freshener"></i>
+                                            <span>Hair Thinning/Loss</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="pcos-option">
+                                        <input type="checkbox" id="pcos7" name="symptom" value="darkening">
+                                        <label for="pcos7">
+                                            <i class="fas fa-moon"></i>
+                                            <span>Skin Darkening</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="pcos-option">
+                                        <input type="checkbox" id="pcos8" name="symptom" value="infertility">
+                                        <label for="pcos8">
+                                            <i class="fas fa-baby"></i>
+                                            <span>Difficulty Conceiving</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="button" onclick="predictPCOS()" class="btn btn-primary btn-block">
+                                <i class="fas fa-stethoscope"></i> Assess Risk
+                            </button>
+                        </form>
+                        
+                        <div id="pcosResult" class="pcos-result">
+                            <div class="pcos-result-header">
+                                <h4>Your PCOS Risk Assessment</h4>
+                                <div class="risk-meter">
+                                    <div class="meter-fill low"></div>
+                                    <div class="meter-labels">
+                                        <span>Low</span>
+                                        <span>Medium</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pcos-result-body">
+                                <p>Based on your symptoms, your risk for PCOS appears to be <strong>low</strong>. However, if you have concerns about your symptoms, we recommend consulting with a healthcare provider for a professional evaluation.</p>
+                                
+                                <div class="pcos-actions">
+                                    <a href="#" class="btn btn-outline">
+                                        <i class="fas fa-book-medical"></i> Learn About PCOS
+                                    </a>
+                                    <a href="#" class="btn btn-outline">
+                                        <i class="fas fa-user-md"></i> Find a Specialist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted by <span>Thousands of Women</span></h2>
+                <p>Here's what our community has to say about PeriodPal</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"PeriodPal has completely changed how I understand my body. The predictions are spot on and the exercise recommendations have helped me manage my PMS symptoms."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J.">
+                        <div class="author-info">
+                            <h4>Sarah J.</h4>
+                            <span>User for 2 years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"As someone with PCOS, the insights from PeriodPal helped me identify patterns I never noticed before. My doctor was impressed with the data I brought to my appointment."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Maria L.">
+                        <div class="author-info">
+                            <h4>Maria L.</h4>
+                            <span>User for 1 year</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>"The nutrition recommendations during different phases of my cycle have made such a difference in my energy levels and mood swings. Highly recommend!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya K.">
+                        <div class="author-info">
+                            <h4>Priya K.</h4>
+                            <span>User for 8 months</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Take Control of Your <span>Cycle Health</span>?</h2>
+                <p>Join thousands of women who are already using PeriodPal to understand their bodies better and optimize their health.</p>
+                <div class="cta-buttons">
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus"></i> Sign Up Free
+                    </a>
+                    <a href="{{ url_for('main.about') }}" class="btn btn-outline btn-lg">
+                        <i class="fas fa-info-circle"></i> Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="logo-text">Period<span>Pal</span></div>
+                    </div>
+                    <p>Empowering women through cycle awareness and personalized health insights since 2023.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                        <li><a href="{{ url_for('main.about') }}">About Us</a></li>
+                        <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Health Tips</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for the latest health tips and feature updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 PeriodPal. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize variables
+        let cycleChart;
+        const today = new Date();
+        
+        // DOM Elements
+        const lastPeriodInput = document.getElementById('lastPeriod');
+        const cycleLengthSlider = document.getElementById('cycleLength');
+        const cycleLengthValue = document.getElementById('cycleLengthValue');
+        const periodDurationSlider = document.getElementById('periodDuration');
+        const periodDurationValue = document.getElementById('periodDurationValue');
+        const generateBtn = document.getElementById('generatePredictions');
+        
+        // Result elements
+        const nextPeriodDate = document.getElementById('nextPeriodDate');
+        const periodCountdown = document.getElementById('periodCountdown');
+        const fertilityDates = document.getElementById('fertilityDates');
+        const fertilityStatus = document.getElementById('fertilityStatus');
+        const cycleDay = document.getElementById('cycleDay');
+        const cyclePhase = document.getElementById('cyclePhase');
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default last period date to 28 days ago (default cycle length)
+            const defaultLastPeriod = new Date();
+            defaultLastPeriod.setDate(defaultLastPeriod.getDate() - 28);
+            lastPeriodInput.valueAsDate = defaultLastPeriod;
+            
+            // Initialize sliders
+            cycleLengthSlider.addEventListener('input', function() {
+                cycleLengthValue.textContent = this.value;
+            });
+            
+            periodDurationSlider.addEventListener('input', function() {
+                periodDurationValue.textContent = this.value;
+            });
+            
+            // Initialize chart
+            initChart();
+            
+            // Generate initial predictions
+            generatePredictions();
+            
+            // Set up event listeners
+            generateBtn.addEventListener('click', generatePredictions);
+            lastPeriodInput.addEventListener('change', generatePredictions);
+            cycleLengthSlider.addEventListener('change', generatePredictions);
+            periodDurationSlider.addEventListener('change', generatePredictions);
+            
+            // Mobile menu toggle
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.toggle('show');
+            });
+        });
+        
+        function initChart() {
+            const options = {
+                series: [{
+                    name: 'Cycle Intensity',
+                    data: generateCycleData(28, 5) // Default values
+                }],
+                chart: {
+                    height: 300,
+                    type: 'area',
+                    toolbar: { show: false },
+                    zoom: { enabled: false }
+                },
+                colors: ['#ff6b9a'],
+                dataLabels: { enabled: false },
+                stroke: { curve: 'smooth', width: 2 },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 0.3,
+                        stops: [0, 90, 100]
+                    }
+                },
+                xaxis: {
+                    categories: Array.from({length: 28}, (_, i) => i+1),
+                    title: { text: 'Day of Cycle' }
+                },
+                yaxis: {
+                    min: 0,
+                    max: 10,
+                    title: { text: 'Intensity' }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value) {
+                            if (value < 3) return "Menstrual Phase";
+                            if (value < 6) return "Follicular Phase";
+                            if (value < 9) return "Ovulation Phase";
+                            return "Luteal Phase";
+                        }
+                    }
+                }
+            };
+            
+            cycleChart = new ApexCharts(document.querySelector("#periodChart"), options);
+            cycleChart.render();
+        }
+        
+        function generateCycleData(cycleLength, periodDuration) {
+            const data = [];
+            // Menstrual phase (first days)
+            for (let i = 0; i < periodDuration; i++) {
+                data.push(Math.random() * 2 + 1); // Low intensity
+            }
+            
+            // Follicular phase
+            const follicularDays = Math.floor((cycleLength - periodDuration) * 0.4);
+            for (let i = 0; i < follicularDays; i++) {
+                data.push(Math.random() * 2 + 3); // Medium intensity
+            }
+            
+            // Ovulation phase (3 days peak)
+            for (let i = 0; i < 3; i++) {
+                data.push(Math.random() * 2 + 7); // High intensity
+            }
+            
+            // Luteal phase (remaining days)
+            const remainingDays = cycleLength - periodDuration - follicularDays - 3;
+            for (let i = 0; i < remainingDays; i++) {
+                data.push(Math.random() * 2 + 5); // Medium-high intensity
+            }
+            
+            return data;
+        }
+        
+        function generatePredictions() {
+            const lastPeriod = new Date(lastPeriodInput.value);
+            const cycleLength = parseInt(cycleLengthSlider.value);
+            const periodDuration = parseInt(periodDurationSlider.value);
+            
+            if (!lastPeriod || isNaN(lastPeriod.getTime())) {
+                alert("Please enter a valid last period date");
+                return;
+            }
+            
+            // Calculate next period date
+            const nextPeriod = new Date(lastPeriod);
+            nextPeriod.setDate(nextPeriod.getDate() + cycleLength);
+            
+            // Calculate fertile window (ovulation ~14 days before next period)
+            const ovulationDate = new Date(nextPeriod);
+            ovulationDate.setDate(ovulationDate.getDate() - 14);
+            
+            const fertileStart = new Date(ovulationDate);
+            fertileStart.setDate(fertileStart.getDate() - 3);
+            
+            const fertileEnd = new Date(ovulationDate);
+            fertileEnd.setDate(fertileEnd.getDate() + 3);
+            
+            // Calculate days until next period
+            const diffTime = nextPeriod - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            // Determine fertility status
+            const isFertile = today >= fertileStart && today <= fertileEnd;
+            
+            // Calculate current cycle day
+            const dayOfCycle = Math.floor((today - lastPeriod) / (1000 * 60 * 60 * 24)) + 1;
+            
+            // Determine cycle phase
+            let phase;
+            if (dayOfCycle <= periodDuration) {
+                phase = "Menstrual Phase";
+            } else if (dayOfCycle <= periodDuration + 7) {
+                phase = "Follicular Phase";
+            } else if (dayOfCycle <= periodDuration + 10) {
+                phase = "Ovulation Phase";
+            } else {
+                phase = "Luteal Phase";
+            }
+            
+            // Update UI
+            nextPeriodDate.textContent = formatDate(nextPeriod);
+            periodCountdown.textContent = diffDays > 0 ? `in ${diffDays} days` : "Today";
+            fertilityDates.textContent = `${formatDate(fertileStart, true)} - ${formatDate(fertileEnd, true)}`;
+            fertilityStatus.textContent = isFertile ? "High chance" : "Low chance";
+            fertilityStatus.style.color = isFertile ? "#00b894" : "#636e72";
+            cycleDay.textContent = `Day ${dayOfCycle}`;
+            cyclePhase.textContent = phase;
+            
+            // Update exercise recommendation based on phase
+            let exerciseSuggestion = "";
+            if (phase === "Menstrual Phase") {
+                exerciseSuggestion = "Gentle yoga and walking are recommended during your menstrual phase to help with cramps and fatigue.";
+            } else if (phase === "Follicular Phase") {
+                exerciseSuggestion = "This is a great time for high-intensity workouts and strength training as your energy levels rise.";
+            } else if (phase === "Ovulation Phase") {
+                exerciseSuggestion = "Take advantage of your peak energy with challenging workouts and endurance training.";
+            } else {
+                exerciseSuggestion = "Moderate exercise like pilates and light cardio can help with potential PMS symptoms during this phase.";
+            }
+            document.getElementById("exerciseSuggestion").textContent = exerciseSuggestion;
+            
+            // Update chart with new data
+            cycleChart.updateSeries([{
+                data: generateCycleData(cycleLength, periodDuration)
+            }]);
+            
+            // Update x-axis categories for the new cycle length
+            cycleChart.updateOptions({
+                xaxis: {
+                    categories: Array.from({length: cycleLength}, (_, i) => i+1)
+                }
+            });
+        }
+        
+        function formatDate(date, short = false) {
+            if (short) {
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            }
+            return date.toLocaleDateString('en-US', { 
+                month: 'long', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+        }
+        
+        function openTab(event, tabId) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active-tab");
+            }
+            
+            // Deactivate all tab buttons
+            const tabButtons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Activate the selected tab
+            document.getElementById(tabId).classList.add("active-tab");
+            event.currentTarget.classList.add("active");
+        }
+        
+        function logMood() {
+            const mood = document.querySelector('input[name="mood"]:checked').value;
+            const symptoms = Array.from(document.querySelectorAll('input[name="symptom"]:checked'))
+                                .map(el => el.value)
+                                .join(", ");
+            const notes = document.getElementById("notes").value;
+            const date = new Date().toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+            
+            const moodLog = document.getElementById("moodLog");
+            const logEntry = document.createElement("div");
+            logEntry.className = "mood-entry";
+            logEntry.innerHTML = `
+                <div class="mood-entry-header">
+                    <span class="mood-date">${date}</span>
+                    <span class="mood-value ${mood.toLowerCase()}">
+                        <i class="fas fa-${getMoodIcon(mood)}"></i> ${mood}
+                    </span>
+                </div>
+                ${symptoms ? `<div class="mood-symptoms"><strong>Symptoms:</strong> ${symptoms}</div>` : ''}
+                ${notes ? `<div class="mood-notes">${notes}</div>` : ''}
+            `;
+            
+            moodLog.insertBefore(logEntry, moodLog.firstChild);
+            
+            // Clear the form
+            document.getElementById("notes").value = "";
+            document.querySelectorAll('input[name="symptom"]').forEach(el => el.checked = false);
+        }
+        
+        function getMoodIcon(mood) {
+            switch(mood) {
+                case "Happy": return "laugh-beam";
+                case "Sad": return "sad-tear";
+                case "Anxious": return "flushed";
+                case "Energetic": return "bolt";
+                case "Tired": return "tired";
+                default: return "smile";
+            }
+        }
+        
+        function predictPCOS() {
+            const symptoms = document.querySelectorAll('input[name="symptom"]:checked');
+            const symptomCount = symptoms.length;
+            let resultText = "";
+            let riskLevel = "";
+            let riskPercentage = "0%";
+            
+            if (symptomCount >= 6) {
+                resultText = "High risk of PCOS. We strongly recommend consulting with a healthcare provider for proper diagnosis and treatment options.";
+                riskLevel = "high";
+                riskPercentage = "90%";
+            } else if (symptomCount >= 3) {
+                resultText = "Moderate risk of PCOS. Consider making an appointment with your doctor to discuss your symptoms and potential next steps.";
+                riskLevel = "medium";
+                riskPercentage = "60%";
+            } else {
+                resultText = "Low risk of PCOS. However, if you have concerns about any symptoms, we recommend discussing them with your healthcare provider.";
+                riskLevel = "low";
+                riskPercentage = "30%";
+            }
+            
+            // Update the risk meter
+            const meterFill = document.querySelector(".meter-fill");
+            meterFill.className = "meter-fill " + riskLevel;
+            meterFill.style.width = riskPercentage;
+            
+            // Update the result text
+            document.querySelector(".pcos-result-body p").innerHTML = `Based on your symptoms, your risk for PCOS appears to be <strong>${riskLevel}</strong>. ${resultText}`;
+            
+            // Show the result section if hidden
+            document.getElementById("pcosResult").style.display = "block";
+        }
+    </script>
+</body>
+</html>
